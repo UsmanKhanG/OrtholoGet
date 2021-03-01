@@ -1,6 +1,7 @@
 import requests, sys, json
 from pprint import pprint
 import os
+from os import path
 import tkinter as tk
 def setSymbol(symbol):
     global geneName 
@@ -11,7 +12,10 @@ def setSpecies(speciesName):
 def saveToFolder():
     for i in range(len(speciesList)):
         if intVarList[i].get():
-            createRefSeqFile(align_seqList[i],speciesList[i]+'_'+geneName)
+            if not path.exists(speciesList[i]+'_'+geneName+'.fasta'):
+                createRefSeqFile(align_seqList[i],speciesList[i]+'_'+geneName)
+            else:
+                createRefSeqFile(align_seqList[i],speciesList[i]+'_'+geneName+str(i))
 def fetchURI(server, request, contentType):
     r = requests.get(server+request, headers={ "accept" : contentType})
     # Response 200 means request is ok
