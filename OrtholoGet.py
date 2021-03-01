@@ -80,6 +80,11 @@ def main():
     global intVarList
     speciesList = []
     align_seqList = []
+    firstHomology = homologies[0]
+    source = firstHomology['source']
+    species = source['species']
+    align_seq = source['align_seq']
+    createRefSeqFile(align_seq, species+'_'+geneName+'_source')
     for ortholog in homologies:
         # pprint(ortholog)
         source = ortholog['target']
